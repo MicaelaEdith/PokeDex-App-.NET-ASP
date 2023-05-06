@@ -15,9 +15,9 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <nav class="navbar navbar-expand-lg bg-body-tertiary"  data-bs-theme="dark">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">PokedexWeb</a>
+                    <a class="navbar-brand" href="Default.aspx">PokedexWeb</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -31,7 +31,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pokemons
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Listar</a></li>
+                                    <li><a class="dropdown-item" href="ListaPokemons.aspx">Listar</a></li>
                                     <li><a class="dropdown-item" href="#">Agregar</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
@@ -41,14 +41,17 @@
                             </li>
                         </ul>
                         <form class="d-flex" role="search">
-                            <button class="btn btn-outline-secondary btn-sm" type="submit">Buscar</button> &nbsp    
-                            <input  class="form-control w-25 p-1" type="search" placeholder="" aria-label="">
+                            <asp:Button Text="Buscar" CssClass="btn btn-outline-secondary btn-sm" ID="btnBuscar" OnClick="btnBuscar_Click" runat="server" />
+                            &nbsp       
+                            <asp:TextBox runat="server" CssClass="form-control w-25 p-1" ID="txtBuscar"></asp:TextBox>
                         </form>
                     </div>
                 </div>
             </nav>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+            <div class="container">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
         </div>
     </form>
 </body>

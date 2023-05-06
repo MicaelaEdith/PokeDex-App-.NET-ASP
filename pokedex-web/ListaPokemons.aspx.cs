@@ -4,19 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Negocio;
 
 namespace pokedex_web
 {
-    public partial class master : System.Web.UI.MasterPage
+    public partial class ListaPokemons : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-        }
-
-        protected void btnBuscar_Click(object sender, EventArgs e)
-        {
-
+            PokemonNegocio negocio = new PokemonNegocio();
+            dgvPokemons.DataSource = negocio.listarConSP();
+            dgvPokemons.DataBind();
         }
     }
 }

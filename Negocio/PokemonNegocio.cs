@@ -15,6 +15,46 @@ namespace Negocio
         class PokemonNegocio
     {
 
+        public List<Pokemon> listarConSP()
+        {
+            List<Pokemon> lista = new List<Pokemon>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("storedListar");
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Pokemon Aux = new Pokemon();
+                    Aux.Id = (int)datos.Lector["Id"];
+                    Aux.Numero = datos.Lector.GetInt32(0);
+                    Aux.Nombre = (string)datos.Lector["Nombre"];
+                    Aux.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    if (!(datos.Lector.IsDBNull(datos.Lector.GetOrdinal("UrlImagen"))))
+                        Aux.UrlImagen = (string)datos.Lector["UrlImagen"];
+
+
+                    Aux.Tipo = new Elemento();
+                    Aux.Tipo.Id = (int)datos.Lector["IdTipo"];
+                    Aux.Tipo.Descripcion = (string)datos.Lector["Tipo"];
+                    Aux.Debilidad = new Elemento();
+                    Aux.Debilidad.Id = (int)datos.Lector["IdDebilidad"];
+                    Aux.Debilidad.Descripcion = (string)datos.Lector["Debilidad"];
+
+                    lista.Add(Aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
         public List<Pokemon> listar()
         {
             List<Pokemon> lista = new List<Pokemon>();
