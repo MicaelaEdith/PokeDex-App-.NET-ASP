@@ -16,5 +16,23 @@ namespace pokedex_web
             dgvPokemons.DataSource = negocio.listarConSP();
             dgvPokemons.DataBind();
         }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dgvPokemons_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string id = dgvPokemons.SelectedDataKey.Value.ToString();
+            Response.Redirect("FormularioPokemon.aspx?id=" + id);
+
+        }
+
+        protected void dgvPokemons_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvPokemons.PageIndex = e.NewPageIndex;
+            dgvPokemons.DataBind();
+        }
     }
 }

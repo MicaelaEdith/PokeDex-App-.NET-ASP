@@ -32,7 +32,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="ListaPokemons.aspx">Listar</a></li>
-                                    <li><a class="dropdown-item" href="#">Agregar</a></li>
+                                    <li><a class="dropdown-item" href="FormularioPokemon.aspx">Agregar</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -41,7 +41,7 @@
                             </li>
                         </ul>
                         <form class="d-flex" role="search">
-                            <asp:Button Text="Buscar" CssClass="btn btn-outline-secondary btn-sm" ID="btnBuscar" OnClick="btnBuscar_Click" runat="server" />
+                            <asp:Button Text="Buscar" CssClass="btn btn-secondary btn-sm" ID="btnBuscar" OnClick="btnBuscar_Click" runat="server" />
                             &nbsp       
                             <asp:TextBox runat="server" CssClass="form-control w-25 p-1" ID="txtBuscar"></asp:TextBox>
                         </form>
