@@ -53,6 +53,12 @@
                 </asp:ContentPlaceHolder>
             </div>
         </div>
+        <div class="text-center">
+            <footer>
+                <hr />
+                footer
+            </footer>
+        </div>
     </form>
 </body>
 </html>
