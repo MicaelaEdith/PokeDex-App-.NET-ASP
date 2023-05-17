@@ -67,7 +67,7 @@ namespace pokedex_web
                 nuevo.Debilidad = new Elemento();
                 nuevo.Debilidad.Id = int.Parse(drpDebilidad.SelectedValue);
 
-                negocio.Agregar(nuevo);
+                negocio.AgregarConSP(nuevo);
                 Response.Redirect("ListaPokemons.aspx",false);
 
 
@@ -82,20 +82,38 @@ namespace pokedex_web
 
         protected void txtUrlImagen_TextChanged(object sender, EventArgs e)
         {
+           
+            
             try
             {
-                if (txtUrlImagen.Text != "")
-                
-                    imgPokemon.ImageUrl = txtUrlImagen.Text;
-                
-                else
+
+                try
+                {
+                    if (!string.IsNullOrEmpty(txtUrlImagen.Text))
+                    {
+                        imgPokemon.ImageUrl = txtUrlImagen.Text;
+                    }
+                    else
+                    {
+                        imgPokemon.ImageUrl = "Img/imgNoDisponible.jpg";
+                    }
+
+
+                }
+                catch (System.Net.WebException ex)
+                {
+
                     imgPokemon.ImageUrl = "Img/imgNoDisponible.jpg";
+                    
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                imgPokemon.ImageUrl = "Img/imgNoDisponible.jpg";
-                throw;
-            } 
+
+                throw ex;
+            }
+
+
         }
 
     }

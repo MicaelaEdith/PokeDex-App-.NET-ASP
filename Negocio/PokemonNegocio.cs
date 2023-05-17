@@ -110,6 +110,7 @@ namespace Negocio
 
             try
             {
+
                 datos.setearConsulta("Insert into POKEMONS(Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad,UrlImagen)Values("+ nuevo.Numero +", '"+nuevo.Nombre+ "', '"+ nuevo.Descripcion+"', 1, @idTipo, @idDebilidad,@UrlImagen)");
                 datos.setearParametro("@idTipo", nuevo.Tipo.Id);
                 datos.setearParametro("@idDebilidad", nuevo.Debilidad.Id);
@@ -125,6 +126,42 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+
+        }
+
+        public void AgregarConSP(Pokemon nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                /*DB StoreProcedure
+                 * create procedure storedAltaPokemon
+                   @numero int, @nombre varchar(50),@desc varchar(50), @img varchar(300), @idTipo int, @idDebilidad int,null, int
+                   as
+                   insert into POKEMONS values(@numero, @nombre, @desc, @img, @idTipo, @idDebilidad, 1);*/
+
+
+                datos.setearProcedimiento("storedAltaPokemon");
+                datos.setearParametro("@numero", nuevo.Numero);
+                datos.setearParametro("@nombre", nuevo.Nombre);
+                datos.setearParametro("@desc", nuevo.Descripcion);
+                datos.setearParametro("@img", nuevo.UrlImagen);
+                datos.setearParametro("@idTipo", nuevo.Tipo.Id);
+                datos.setearParametro("@idDebilidad", nuevo.Debilidad.Id);
+                //datos.setearParametro("@idEvolucion", null);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
 
         }
 

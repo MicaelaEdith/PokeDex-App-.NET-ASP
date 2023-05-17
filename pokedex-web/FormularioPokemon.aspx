@@ -48,6 +48,9 @@
                         <br />
                         <asp:Image ID="imgPokemon" runat="server" ImageUrl="Img/imgNoDisponible.jpg" Width="50%" />
                         <br />
+                        <br />
+                        <asp:Label Text="prueba" ID="txtPrueba" runat="server">checkeo:</asp:Label>
+
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
