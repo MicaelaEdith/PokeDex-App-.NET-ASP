@@ -7,7 +7,7 @@
     <div class="row">
           <div class="col-2"></div>
         <div class="col">
-            <asp:GridView ID="dgvPokemons" runat="server" DataKeyNames="Numero" CssClass="table" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvPokemons_SelectedIndexChanged" OnPageIndexChanging="dgvPokemons_PageIndexChanging" AllowPaging="true" PageSize="5">
+            <asp:GridView ID="dgvPokemons" runat="server" DataKeyNames="Id" CssClass="table" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvPokemons_SelectedIndexChanged" OnPageIndexChanging="dgvPokemons_PageIndexChanging" AllowPaging="true" PageSize="5">
                 <Columns>
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                     <asp:BoundField HeaderText="Número" DataField="Numero" />

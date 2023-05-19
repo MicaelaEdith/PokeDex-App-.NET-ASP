@@ -96,15 +96,6 @@ namespace pokedex_web
         protected global::System.Web.UI.WebControls.Image imgPokemon;
 
         /// <summary>
-        /// Control txtPrueba.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtPrueba;
-
-        /// <summary>
         /// Control btnAgregar.
         /// </summary>
         /// <remarks>

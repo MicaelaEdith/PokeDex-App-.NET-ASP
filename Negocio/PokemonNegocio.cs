@@ -10,8 +10,8 @@ using Dominio;
 namespace Negocio
 
 {
-    public 
-        
+    public
+
         class PokemonNegocio
     {
 
@@ -55,7 +55,7 @@ namespace Negocio
 
         }
 
-        public List<Pokemon> listar()
+        public List<Pokemon> listar(string id = "")
         {
             List<Pokemon> lista = new List<Pokemon>();
             SqlConnection conexion = new SqlConnection();
@@ -67,8 +67,14 @@ namespace Negocio
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true;";
                 comando.CommandType = System.Data.CommandType.Text;
 
-                comando.CommandText= "SELECT Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id FROM POKEMONS P, ELEMENTOS E, ELEMENTOS D WHERE E.Id=P.IdTipo AND D.id=P.IdDebilidad AND P.Activo=1";
+                comando.CommandText = "SELECT Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id FROM POKEMONS P, ELEMENTOS E, ELEMENTOS D WHERE E.Id=P.IdTipo AND D.id=P.IdDebilidad AND P.Activo=1 ";
+
+                if (id != "")
+                    comando.CommandText += " and P.id= +" + id;
+
                 comando.Connection = conexion;
+
+
 
                 conexion.Open();
                 lector = comando.ExecuteReader();
@@ -81,8 +87,8 @@ namespace Negocio
                     Aux.Nombre = (string)lector["Nombre"];
                     Aux.Descripcion = (string)lector["Descripcion"];
 
-                    if(!(lector.IsDBNull(lector.GetOrdinal("UrlImagen"))))
-                    Aux.UrlImagen = (string)lector["UrlImagen"];
+                    if (!(lector.IsDBNull(lector.GetOrdinal("UrlImagen"))))
+                        Aux.UrlImagen = (string)lector["UrlImagen"];
 
 
                     Aux.Tipo = new Elemento();
@@ -104,14 +110,14 @@ namespace Negocio
 
         }
 
-        public void Agregar (Pokemon nuevo)
+        public void Agregar(Pokemon nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
 
-                datos.setearConsulta("Insert into POKEMONS(Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad,UrlImagen)Values("+ nuevo.Numero +", '"+nuevo.Nombre+ "', '"+ nuevo.Descripcion+"', 1, @idTipo, @idDebilidad,@UrlImagen)");
+                datos.setearConsulta("Insert into POKEMONS(Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad,UrlImagen)Values(" + nuevo.Numero + ", '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', 1, @idTipo, @idDebilidad,@UrlImagen)");
                 datos.setearParametro("@idTipo", nuevo.Tipo.Id);
                 datos.setearParametro("@idDebilidad", nuevo.Debilidad.Id);
                 datos.setearParametro("@UrlImagen", nuevo.UrlImagen);
@@ -165,7 +171,7 @@ namespace Negocio
 
         }
 
-        public void Modificar (Pokemon poke)
+        public void Modificar(Pokemon poke)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -193,6 +199,49 @@ namespace Negocio
                 datos.cerrarConexion();
             }
 
+        }
+
+        public void ModificarConSP(Pokemon poke)
+        {
+
+          /*    seteo del procedimiento almacenado
+           *    create procedure storedModificarPokemon
+                @numero int,
+                @nombre varchar(50),
+                @desc varchar(50),
+                @img varchar(300),
+                @idTipo int,
+                @idDebilidad int,
+                @id int
+                as
+                update POKEMONS set Numero = @numero,Nombre = @nombre, Descripcion = @desc, UrlImagen = @img, IdTipo = @idTipo,IdDebilidad = @idDebilidad
+                where id = @id;*/
+
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("storedModificarPokemon");
+                datos.setearParametro("@numero", poke.Numero);
+                datos.setearParametro("@nombre", poke.Nombre);
+                datos.setearParametro("@desc", poke.Descripcion);
+                datos.setearParametro("@img", poke.UrlImagen);
+                datos.setearParametro("@idTipo", poke.Tipo.Id);
+                datos.setearParametro("@idDebilidad", poke.Debilidad.Id);
+                datos.setearParametro("@id", poke.Id);
+
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+
+                datos.cerrarConexion();
+            }
         }
 
         public void Eliminar(int id)

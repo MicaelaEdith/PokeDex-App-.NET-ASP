@@ -13,10 +13,15 @@ namespace pokedex_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
             txtID.Enabled = false;
+
 
             try
             {
+                //Configuración inicial de la pantalla
+
                 if (!IsPostBack)
                 {
                     ElementoNegocio negocio = new ElementoNegocio();
@@ -37,6 +42,33 @@ namespace pokedex_web
 
 
                 }
+
+                //Configuración de carga de datos para modificar
+                string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                if (id!= "" && !IsPostBack)
+                {
+                    btnAgregar.Text = "Modificar";
+
+                    PokemonNegocio negocio = new PokemonNegocio();
+                    Pokemon seleccionado = (negocio.listar(id))[0];
+
+                    //Pre Carga de datos
+
+                    txtID.Text = id;
+                    txtNombre.Text = seleccionado.Nombre;
+                    txtNumero.Text = seleccionado.Numero.ToString();
+                    drpTipo.SelectedValue = seleccionado.Tipo.Id.ToString();
+                    drpDebilidad.SelectedValue = seleccionado.Debilidad.Id.ToString();
+                    
+                    txtDescripcion.Text = seleccionado.Descripcion;
+                    txtUrlImagen.Text = seleccionado.UrlImagen;
+
+                    imgPokemon.ImageUrl = txtUrlImagen.Text;
+
+
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -54,7 +86,7 @@ namespace pokedex_web
                 Pokemon nuevo = new Pokemon();
                 PokemonNegocio negocio = new PokemonNegocio();
 
-
+                
                 nuevo.Numero = int.Parse(txtNumero.Text);
                 nuevo.Nombre = txtNombre.Text;
                 nuevo.Descripcion = txtDescripcion.Text;
@@ -67,7 +99,14 @@ namespace pokedex_web
                 nuevo.Debilidad = new Elemento();
                 nuevo.Debilidad.Id = int.Parse(drpDebilidad.SelectedValue);
 
-                negocio.AgregarConSP(nuevo);
+                if (Request.QueryString["id"] != null)
+                {
+                    nuevo.Id =int.Parse(Request.QueryString["id"]);
+                    negocio.ModificarConSP(nuevo);
+                }
+                else
+                    negocio.AgregarConSP(nuevo);
+
                 Response.Redirect("ListaPokemons.aspx",false);
 
 
