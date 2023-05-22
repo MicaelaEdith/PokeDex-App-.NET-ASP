@@ -18,8 +18,8 @@
                     <div class="card text-center">
                         <img src="<%: poke.UrlImagen %>" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h4 class="card-title"> <%: poke.Nombre %> </h4>
-                            <p class="card-text"><%: poke.Descripcion %></p>
+                            <h4 class="card-title"> <%: poke.Nombre +" - N° "+ poke.Numero  %> </h4>
+                            <p class="card-text"><%: poke.Descripcion%></p>
                             <a href="DetallePokemon.aspx?id=<%:poke.Id %>"> Ver Detalle</a>
                         </div> 
                     </div>

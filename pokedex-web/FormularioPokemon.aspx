@@ -56,8 +56,16 @@
 
             <br />
             <div class="mb-3">
-                <asp:Button Text="Agregar" ID="btnAgregar" OnClick="btnAgregar_Click" CssClass="btn btn-secondary" runat="server" />
-                <a href="default.aspx" class="btn btn-secondary">Cancelar</a>
+                <asp:Button Text="Agregar" ID="btnAgregar" OnClick="btnAgregar_Click" CssClass="btn btn-secondary col-md-2 text-sm-start w-auto" runat="server" />
+                
+                <a href="default.aspx" class="btn btn-secondary col-sm-2 text-sm-start ms-1 w-auto">Cancelar</a>
+                <asp:Button Text="Eliminar Pokemon" ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-dark col-md-4 ms-1 w-auto" Visible="false" runat="server" />
+                <asp:Button Text="Inactivar" ID="btnInactivar" CssClass="btn btn-secondary col-md-2 text-sm-start ms-1 w-auto" OnClick="btnInactivar_Click" Visible="false" runat="server" />
+            </div>
+            <div>
+                <asp:CheckBox Text=" Confirmar eliminación de Pokemon" ID="ckbEliminar" Visible="false" runat="server" />
+                <asp:Button Text="Eliminar" CssClass="btn btn-danger ms-2" ID="btnConfirmarEliminar" OnClick="btnConfirmarEliminar_Click" Visible="false" runat="server" />
+
             </div>
         </div>
     </div>

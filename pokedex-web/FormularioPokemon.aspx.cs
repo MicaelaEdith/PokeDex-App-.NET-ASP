@@ -45,9 +45,11 @@ namespace pokedex_web
 
                 //Configuración de carga de datos para modificar
                 string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-                if (id!= "" && !IsPostBack)
+                if (id != "" && !IsPostBack)
                 {
                     btnAgregar.Text = "Modificar";
+                    btnEliminar.Visible = true;
+                    btnInactivar.Visible = true;
 
                     PokemonNegocio negocio = new PokemonNegocio();
                     Pokemon seleccionado = (negocio.listar(id))[0];
@@ -59,7 +61,7 @@ namespace pokedex_web
                     txtNumero.Text = seleccionado.Numero.ToString();
                     drpTipo.SelectedValue = seleccionado.Tipo.Id.ToString();
                     drpDebilidad.SelectedValue = seleccionado.Debilidad.Id.ToString();
-                    
+
                     txtDescripcion.Text = seleccionado.Descripcion;
                     txtUrlImagen.Text = seleccionado.UrlImagen;
 
@@ -67,6 +69,8 @@ namespace pokedex_web
 
 
                 }
+
+
 
 
             }
@@ -155,5 +159,46 @@ namespace pokedex_web
 
         }
 
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ckbEliminar.Visible = true;
+            btnConfirmarEliminar.Visible = true;
+        }
+
+        protected void btnConfirmarEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PokemonNegocio negocio = new PokemonNegocio();
+
+                if (ckbEliminar.Checked)
+                {
+                    negocio.Eliminar(int.Parse(txtID.Text));
+                    Response.Redirect("ListaPokemons.aspx");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error ",ex);
+            }
+        }
+
+        protected void btnInactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PokemonNegocio negocio = new PokemonNegocio();
+                negocio.EliminarLogico(int.Parse(txtID.Text));
+                Response.Redirect("ListaPokemons.aspx");
+
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error ", ex);
+
+            }
+        }
     }
 }
