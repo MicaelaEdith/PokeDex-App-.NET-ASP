@@ -41,6 +41,7 @@ namespace Negocio
                     Aux.Debilidad = new Elemento();
                     Aux.Debilidad.Id = (int)datos.Lector["IdDebilidad"];
                     Aux.Debilidad.Descripcion = (string)datos.Lector["Debilidad"];
+                    Aux.Activo = bool.Parse(datos.Lector["Activo"].ToString());
 
                     lista.Add(Aux);
                 }
@@ -67,7 +68,7 @@ namespace Negocio
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true;";
                 comando.CommandType = System.Data.CommandType.Text;
 
-                comando.CommandText = "SELECT Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id FROM POKEMONS P, ELEMENTOS E, ELEMENTOS D WHERE E.Id=P.IdTipo AND D.id=P.IdDebilidad AND P.Activo=1 ";
+                comando.CommandText = "SELECT Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id, P.Activo FROM POKEMONS P, ELEMENTOS E, ELEMENTOS D WHERE E.Id=P.IdTipo AND D.id=P.IdDebilidad ";
 
                 if (id != "")
                     comando.CommandText += " and P.id= +" + id;
@@ -97,6 +98,7 @@ namespace Negocio
                     Aux.Debilidad = new Elemento();
                     Aux.Debilidad.Id = (int)lector["IdDebilidad"];
                     Aux.Debilidad.Descripcion = (string)lector["Debilidad"];
+                    Aux.Activo = bool.Parse(lector["Activo"].ToString());
 
                     lista.Add(Aux);
                 }
@@ -176,7 +178,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update POKEMONS set numero=@Numero,Nombre=@nombre,Descripcion=@descripcion,UrlImagen=@img, IdTipo=@idTipo, IdDebilidad=@idDebilidad where Id=@id");
+                datos.setearConsulta("update POKEMONS set numero=@Numero,Nombre=@nombre,Descripcion=@descripcion,UrlImagen=@img, IdTipo=@idTipo, IdDebilidad=@idDebilidad, Activo=1 where Id=@id");
                 datos.setearParametro("@numero", poke.Numero);
                 datos.setearParametro("@nombre", poke.Nombre);
                 datos.setearParametro("@descripcion", poke.Descripcion);

@@ -14,7 +14,7 @@ namespace pokedex_web
         protected void Page_Load(object sender, EventArgs e)
         {
 
-
+            bool pokeActivo = false;
             txtID.Enabled = false;
 
 
@@ -49,10 +49,18 @@ namespace pokedex_web
                 {
                     btnAgregar.Text = "Modificar";
                     btnEliminar.Visible = true;
-                    btnInactivar.Visible = true;
 
                     PokemonNegocio negocio = new PokemonNegocio();
                     Pokemon seleccionado = (negocio.listar(id))[0];
+                    pokeActivo = seleccionado.Activo;
+
+                    if (!pokeActivo)
+                    {
+                        btnInactivar.Text = "Activar";
+                    }
+
+
+                    btnInactivar.Visible = true;
 
                     //Pre Carga de datos
 
@@ -69,8 +77,6 @@ namespace pokedex_web
 
 
                 }
-
-
 
 
             }
@@ -190,8 +196,21 @@ namespace pokedex_web
             try
             {
                 PokemonNegocio negocio = new PokemonNegocio();
-                negocio.EliminarLogico(int.Parse(txtID.Text));
-                Response.Redirect("ListaPokemons.aspx");
+                if (btnInactivar.Text == "Inactivar")
+                {
+                    negocio.EliminarLogico(int.Parse(txtID.Text));
+                    Response.Redirect("ListaPokemons.aspx");
+                }
+                else
+                {
+                    Pokemon poke = new Pokemon();                  //Esto tendría que guardar el poke en session en el
+                    List<Pokemon> lista = new List<Pokemon>();     //evento page_load para que sea más simple- cambiar luego.
+                    
+                    poke = negocio.listar(Request.QueryString["id"].ToString())[0];
+                    negocio.Modificar(poke);
+                    Response.Redirect("ListaPokemons.aspx");
+                }
+
 
             }
             catch (Exception ex)
