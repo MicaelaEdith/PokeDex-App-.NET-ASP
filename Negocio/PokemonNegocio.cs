@@ -263,13 +263,13 @@ namespace Negocio
 
         }
 
-        public List<Pokemon> filtrar(string campo, string criterio, string filtro)
+        public List<Pokemon> filtrar(string campo, string criterio, string filtro, string estado)
         {
             List<Pokemon> lista = new List<Pokemon>();
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "SELECT Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id FROM POKEMONS P, ELEMENTOS E, ELEMENTOS D WHERE E.Id=P.IdTipo AND D.id=P.IdDebilidad AND P.Activo=1 AND ";
+                string consulta = "SELECT Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id, P.Activo FROM POKEMONS P, ELEMENTOS E, ELEMENTOS D WHERE E.Id=P.IdTipo AND D.id=P.IdDebilidad AND ";
                 switch (campo)
                 {
                     case "Número":
@@ -305,16 +305,26 @@ namespace Negocio
                         switch (criterio)
                         {
                             case "Empieza con":
-                                consulta += "P.Descripcion like '" + filtro + "%'";
+                                consulta += "E.Descripcion like '" + filtro + "%'";
                                 break;
                             case "Termina con":
-                                consulta += "P.Descripcion like '%" + filtro+"'";
+                                consulta += "E.Descripcion like '%" + filtro+"'";
                                 break;
                             default:
-                                consulta += "P.Descripcion like '%" + filtro + "%'";
+                                consulta += "E.Descripcion like '%" + filtro + "%'";
                                 break;
                         }
                         break;
+                }
+
+
+                if (estado == "Activo")
+                {
+                    consulta += " and P.Activo=1";
+                }
+                else if (estado == "Inactivo")
+                {
+                    consulta += " and P.Activo=0";
                 }
 
                 datos.setearConsulta(consulta);
@@ -337,6 +347,7 @@ namespace Negocio
                     Aux.Debilidad = new Elemento();
                     Aux.Debilidad.Id = (int)datos.Lector["IdDebilidad"];
                     Aux.Debilidad.Descripcion = (string)datos.Lector["Debilidad"];
+                    Aux.Activo = bool.Parse(datos.Lector["Activo"].ToString());
 
                     lista.Add(Aux);
                 }
