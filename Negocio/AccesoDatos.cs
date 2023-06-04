@@ -77,7 +77,6 @@ namespace Negocio
             comando.Parameters.AddWithValue(nombre, valor);
         }
 
-
         public void cerrarConexion()
         {
             if (lector != null) lector.Close();

@@ -11,43 +11,34 @@ namespace pokedex_web
 {
 
 
-    public partial class Login
+    public partial class Perfil
     {
 
         /// <summary>
-        /// Control lblIncorrecto.
+        /// Control lbl.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblIncorrecto;
+        protected global::System.Web.UI.WebControls.Label lbl;
 
         /// <summary>
-        /// Control txtUser.
+        /// Control btnAdministrar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUser;
+        protected global::System.Web.UI.WebControls.Button btnAdministrar;
 
         /// <summary>
-        /// Control txtPassword.
+        /// Control btnCerrar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
-
-        /// <summary>
-        /// Control btnIngresar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIngresar;
+        protected global::System.Web.UI.WebControls.Button btnCerrar;
     }
 }
