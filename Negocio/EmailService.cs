@@ -33,7 +33,7 @@ namespace Negocio
             email.Body = cuerpo;
 
         }
-
+        //no envia mail - ver método
         public void enviarEmail()
         {
             try
@@ -43,6 +43,7 @@ namespace Negocio
             catch (Exception ex)
             {
                 throw ex;
+               
             }
         }
 

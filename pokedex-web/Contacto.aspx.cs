@@ -23,11 +23,14 @@ namespace pokedex_web
             try
             {
                 emailService.enviarEmail();
+                Response.Redirect("Default.aspx");
             }
             catch (Exception ex)
             {
 
                 Session.Add("Error: ",ex);
+                Response.Redirect("ListaPokemons.aspx");
+
             }
 
         }
