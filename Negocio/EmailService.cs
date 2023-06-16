@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Net;
+using System.Threading.Tasks;
+
 
 namespace Negocio
 {
@@ -16,10 +19,11 @@ namespace Negocio
         public EmailService()
         {
             server = new SmtpClient();
-            server.Credentials = new NetworkCredential("mailtesteo", "clave");
+            server.Host = "smtp.gmail.com";
+            server.Port = 587;
             server.EnableSsl = true;
-            server.Port = 2525;
-            server.Host = "smtp.mailtrap.io";
+            server.UseDefaultCredentials = false;
+            server.Credentials = new NetworkCredential("mailtesteoapps@gmail.com", "metnhhsaggbtnvox");
         }
 
         public void armarCorreo(string emailDestino, string asunto, string cuerpo)
