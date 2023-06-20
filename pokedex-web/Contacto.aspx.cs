@@ -29,7 +29,7 @@ namespace pokedex_web
             {
 
                 Session.Add("Error: ",ex);
-                Response.Redirect("ListaPokemons.aspx");
+                Response.Redirect("Default.aspx");
 
             }
 

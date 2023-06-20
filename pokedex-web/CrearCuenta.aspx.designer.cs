@@ -15,6 +15,15 @@ namespace pokedex_web
     {
 
         /// <summary>
+        /// Control lblErrorPass.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorPass;
+
+        /// <summary>
         /// Control lblIncorrecto.
         /// </summary>
         /// <remarks>
@@ -42,13 +51,13 @@ namespace pokedex_web
         protected global::System.Web.UI.WebControls.TextBox txtPassword1;
 
         /// <summary>
-        /// Control txtPassworfd2.
+        /// Control txtPassword2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassworfd2;
+        protected global::System.Web.UI.WebControls.TextBox txtPassword2;
 
         /// <summary>
         /// Control btnRegistrarse.

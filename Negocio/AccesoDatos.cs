@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace Negocio
 {
-    public class AccesoDatos  
+    public class AccesoDatos
     {
 
         private SqlConnection conexion;
@@ -44,8 +44,8 @@ namespace Negocio
             comando.Connection = conexion;
             try
             {
-            conexion.Open();
-            lector = comando.ExecuteReader();
+                conexion.Open();
+                lector = comando.ExecuteReader();
 
             }
             catch (Exception ex)
@@ -82,5 +82,22 @@ namespace Negocio
             if (lector != null) lector.Close();
             conexion.Close();
         }
+
+        public int ejecutarAccionScalar()
+        {
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                return int.Parse(comando.ExecuteScalar().ToString());
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
     }
 }
