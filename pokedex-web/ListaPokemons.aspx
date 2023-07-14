@@ -8,18 +8,19 @@
         <div class="col-2"></div>
         <div class="col">
 
-            <div>
+            <div style="margin-bottom: 1vh">
                 <div class="col-4">
                     <asp:Label Text="Filtrar:" runat="server" />
-                    <asp:TextBox ID="txtFiltrar" CssClass="form-control bg-body-secondary col-3" AutoPostBack="true" OnTextChanged="txtFiltrar_TextChanged" runat="server" />
-                    <asp:CheckBox Text="" ID="chkFiltroAvanzado"  AutoPostBack="true" OnCheckedChanged="chkFiltroAvanzado_CheckedChanged" runat="server" />
-                    <asp:Label Text=" Filtro Avanzado" runat="server" />
-                </div>
+                        <asp:TextBox ID="txtFiltrar" CssClass="form-control bg-body-secondary col-3" AutoPostBack="true" OnTextChanged="txtFiltrar_TextChanged" runat="server" />
+                        <asp:CheckBox Text="" ID="chkFiltroAvanzado" AutoPostBack="true" OnCheckedChanged="chkFiltroAvanzado_CheckedChanged" runat="server" />
+                        <asp:Label Text=" Filtro Avanzado" runat="server" />
+                    </div>
+                
             </div>
-            <br />
 
-              <%if (filtroAvanzado)
-                  {%>
+
+            <%if (filtroAvanzado)
+                {%>
 
             <div class="row">
                 <div class="col-3">
@@ -64,7 +65,7 @@
             </div>
             <%} %>
 
-            
+
             <asp:GridView ID="dgvPokemons" runat="server" DataKeyNames="Id" CssClass="table" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvPokemons_SelectedIndexChanged" OnPageIndexChanging="dgvPokemons_PageIndexChanging" AllowPaging="true" PageSize="10">
                 <Columns>
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre" />

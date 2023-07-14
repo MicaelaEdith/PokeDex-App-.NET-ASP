@@ -17,10 +17,12 @@
                 <div class="col">
                     <div class="card text-center">
                         <img src="<%: poke.UrlImagen %>" class="card-img-top" alt="...">
-                        <div class="card-body">
+                        <div class="card-body" 
+                            >
+                            
                             <h4 class="card-title"> <%: poke.Nombre +" - N° "+ poke.Numero  %> </h4>
-                            <p class="card-text"><%: poke.Descripcion%></p>
-                            <a href="DetallePokemon.aspx?id=<%:poke.Id %>"> Ver Detalle</a>
+                            <p style="height:8vh" class="card-text"><%: poke.Descripcion%></p>
+                            <a class="text-decoration-none btn btn-secondary" href="DetallePokemon.aspx?id=<%:poke.Id %>"> Ver detalle</a>
                         </div> 
                     </div>
                 </div>
