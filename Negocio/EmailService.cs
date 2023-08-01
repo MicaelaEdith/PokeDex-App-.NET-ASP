@@ -33,11 +33,17 @@ namespace Negocio
             email.To.Add(emailDestino);
             email.Subject = asunto;
             email.IsBodyHtml = true;
-            //email.Body = "<h1>Reporte de materias a las que se ha inscripto</h1> <br>Hola, te inscribiste.... bla bla";
+            //email.Body = "<h1>Bienvenidx a la App";
             email.Body = cuerpo;
 
         }
-        //no envia mail - ver método
+        //no envia mail - ver método // solucionado con gmail ->
+        /* Para poder utilizar el servicio SMTP de Gmail para el envio de correos es necesario
+         * habilitar Contraseña de Aplicaciones, la contraseña la genera directamente Google
+         * y despues se puede usar con SmtpClient de aspx 
+         * otra opcion es usar el servicio de MailTrap que ya tiene precargado el script de c# para implementarlo directamente. 
+         */
+        
         public void enviarEmail()
         {
             try

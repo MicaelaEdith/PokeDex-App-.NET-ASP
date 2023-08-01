@@ -9,13 +9,6 @@ namespace Negocio
 {
     public class TraineeNegocio
     {
-        //id
-        //Email
-        //pass
-        //admin false
-
-        //nombre apellido fecha img
-
         public int insertarNuevo(Trainee nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -36,8 +29,35 @@ namespace Negocio
                 datos.cerrarConexion();
             }
 
+        }
 
+        public bool Login(Trainee trainee)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("Select id, email, pass, admin from Users Where email=@email and pass=@pass");
+                datos.setearParametro("@email", trainee.Email);
+                datos.setearParametro("@pass", trainee.Pass);
+                datos.ejecutarLectura();
+                if (datos.Lector!=null)
+                {
+                    trainee.Id = (int)datos.Lector["id"];
+                    trainee.Admin = (bool)datos.Lector["admin"];
+                    return true;
+                }
+                else return false;
 
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
 
 

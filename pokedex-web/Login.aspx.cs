@@ -21,15 +21,17 @@ namespace pokedex_web
 
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
-            Usuario usuario;
-            UsuarioNegocio negocio = new UsuarioNegocio();
-
+            Trainee trainee = new Trainee();
+            TraineeNegocio negocio = new TraineeNegocio();
+            //no trae datos, checkear por qué
             try
             {
-                usuario = new Usuario(txtUser.Text, txtPassword.Text,false);
-                if (negocio.Loguear(usuario))
+                trainee.Email = txtUser.Text;
+                trainee.Pass = txtPassword.Text;
+
+                if (negocio.Login(trainee))
                 {
-                    Session.Add("usuario", usuario);
+                    Session.Add("trainee", trainee);
                     Response.Redirect("Perfil.aspx");
                 }
                 else
@@ -40,7 +42,7 @@ namespace pokedex_web
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine("falló");
                 Session.Add("Error ", ex.ToString());
             }
         }

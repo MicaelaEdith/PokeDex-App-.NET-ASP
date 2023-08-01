@@ -8,65 +8,50 @@
         <div class="col-2"></div>
         <div class="col">
 
-            <div style="margin-bottom: 1vh">
                 <div class="col-4">
                     <asp:Label Text="Filtrar:" runat="server" />
                         <asp:TextBox ID="txtFiltrar" CssClass="form-control bg-body-secondary col-3" AutoPostBack="true" OnTextChanged="txtFiltrar_TextChanged" runat="server" />
                         <asp:CheckBox Text="" ID="chkFiltroAvanzado" AutoPostBack="true" OnCheckedChanged="chkFiltroAvanzado_CheckedChanged" runat="server" />
-                        <asp:Label Text=" Filtro Avanzado" runat="server" />
-                    </div>
+                        <asp:Label Text=" Filtro Avanzado" CssClass="mb-1" runat="server" />
+                </div>
                 
-            </div>
-
-
             <%if (filtroAvanzado)
                 {%>
 
             <div class="row">
                 <div class="col-3">
-                    <div class="mb-3">
                         <asp:Label Text="Campo" runat="server" />
                         <asp:DropDownList runat="server" ID="ddlCampo" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged">
                             <asp:ListItem Text="Nombre" />
                             <asp:ListItem Text="Tipo" />
                             <asp:ListItem Text="Número" />
                         </asp:DropDownList>
-                    </div>
+              
                 </div>
                 <div class="col-3">
-                    <div class="mb-3">
                         <asp:Label Text="Criterio" runat="server" />
                         <asp:DropDownList ID="ddlCriterio" CssClass="form-control" runat="server"></asp:DropDownList>
-                    </div>
                 </div>
                 <div class="col-3">
-                    <div class="mb-3">
                         <asp:Label Text="Filtro" runat="server" />
                         <asp:TextBox ID="txtFiltroAvanzado" CssClass="form-control" runat="server" />
-                    </div>
                 </div>
                 <div class="col-3">
-                    <div class="mb-3">
                         <asp:Label Text="Estado" runat="server" />
                         <asp:DropDownList ID="ddlEstado" CssClass="form-control" runat="server">
                             <asp:ListItem Text="Todos" />
                             <asp:ListItem Text="Activo" />
                             <asp:ListItem Text="Inactivo" />
                         </asp:DropDownList>
-                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-3">
-                    <div class="m-3">
-                        <asp:Button Text="Buscar" ID="btnBuscar" CssClass="btn btn-secondary " OnClick="btnBuscar_Click" runat="server" />
-                    </div>
-                </div>
+            <div>
+                  <asp:Button Text="Buscar" ID="btnBuscar" CssClass="btn btn-secondary mb-1 mt-1" OnClick="btnBuscar_Click" runat="server" />
             </div>
             <%} %>
 
 
-            <asp:GridView ID="dgvPokemons" runat="server" DataKeyNames="Id" CssClass="table" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvPokemons_SelectedIndexChanged" OnPageIndexChanging="dgvPokemons_PageIndexChanging" AllowPaging="true" PageSize="10">
+            <asp:GridView ID="dgvPokemons" runat="server" DataKeyNames="Id" CssClass="table mb-1" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvPokemons_SelectedIndexChanged" OnPageIndexChanging="dgvPokemons_PageIndexChanging" AllowPaging="true" PageSize="10">
                 <Columns>
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                     <asp:BoundField HeaderText="Número" DataField="Numero" />
