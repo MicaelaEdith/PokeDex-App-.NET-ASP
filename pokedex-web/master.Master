@@ -23,7 +23,7 @@
                     <div class="collapse navbar-collapse" id="navbarScroll">
                         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                             <li class="nav-item">
-                                <%if (Session["usuario"] == null)
+                                <%if (Session["trainee"] == null)
                                     { %>
                                 <a class="nav-link active" aria-current="page" href="Login.aspx">Login</a>
                                 <%}
@@ -42,12 +42,13 @@
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pokemons
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="ListaPokemons.aspx">Listar</a></li>
                                     <li><a class="dropdown-item" href="FormularioPokemon.aspx">Agregar</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
+                                   <%if (Session["isAdmin"]!=null)
+                                    { %>
+                                    <hr class="dropdown-divider">
                                     <li><a class="dropdown-item" href="#">Editar o Eliminar</a></li>
+                                    <li><a class="dropdown-item" href="ListaPokemons.aspx">Listar</a></li>
+                                     <%} %>
                                 </ul>
                             </li>
                         </ul>

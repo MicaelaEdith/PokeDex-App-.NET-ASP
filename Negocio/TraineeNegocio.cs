@@ -40,13 +40,15 @@ namespace Negocio
                 datos.setearParametro("@email", trainee.Email);
                 datos.setearParametro("@pass", trainee.Pass);
                 datos.ejecutarLectura();
-                if (datos.Lector!=null)
+                
+                if(datos.Lector.Read())
                 {
                     trainee.Id = (int)datos.Lector["id"];
                     trainee.Admin = (bool)datos.Lector["admin"];
                     return true;
                 }
                 else return false;
+
 
             }
             catch (Exception ex)

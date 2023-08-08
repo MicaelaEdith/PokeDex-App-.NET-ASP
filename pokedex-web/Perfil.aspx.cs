@@ -12,29 +12,29 @@ namespace pokedex_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
-            if (Session["usuario"] == null)
+            if (Session["trainee"] == null)
             {
-                Session.Add("Error", "No hay ninguna sesión abierta.");
                 Response.Redirect("Login.aspx");
-                Admin();
             }
-            else   
+            else
+            {
+                Trainee trainee = (Trainee)Session["trainee"];
                 Admin();
+            }  
         }
 
         protected void btnCerrar_Click(object sender, EventArgs e)
         {
-            Session["usuario"] = null;
+            Session.Clear();
             Response.Redirect("Default.aspx");
         }
 
         private void Admin()
         {
-            if (((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.TipoUsuario.Admin)
+            if (((Dominio.Trainee)Session["trainee"]).Admin)
             {
                 btnAdministrar.Visible = true;
+                Session.Add("isAdmin", true);
                 
             }
 
@@ -42,7 +42,7 @@ namespace pokedex_web
 
         protected void btnAdministrar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Administrar.aspx");
+            Response.Redirect("ListaPokemons.aspx");
         }
     }
 }

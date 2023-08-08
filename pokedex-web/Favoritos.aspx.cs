@@ -11,7 +11,7 @@ namespace pokedex_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuario"] == null)
+            if (Session["trainee"] == null)
             {
                 Session.Add("Error", "No hay ninguna sesión abierta.");
                 Response.Redirect("Login.aspx");

@@ -28,9 +28,10 @@ namespace pokedex_web
 
                     user.Email = txtUser.Text;
                     user.Pass = txtPassword2.Text;
-                    int id = traineeNegocio.insertarNuevo(user);
+                    user.Id = traineeNegocio.insertarNuevo(user);
+                    Session.Add("trainee", user);
 
-
+                    Response.Redirect("Default.aspx");
                 }
                 else
                     lblErrorPass.Visible = true;

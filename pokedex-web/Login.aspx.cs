@@ -23,16 +23,16 @@ namespace pokedex_web
         {
             Trainee trainee = new Trainee();
             TraineeNegocio negocio = new TraineeNegocio();
-            //no trae datos, checkear por qué
+
             try
             {
                 trainee.Email = txtUser.Text;
                 trainee.Pass = txtPassword.Text;
 
-                if (negocio.Login(trainee))
+                if(negocio.Login(trainee))
                 {
                     Session.Add("trainee", trainee);
-                    Response.Redirect("Perfil.aspx");
+                    Response.Redirect("Perfil.aspx", false);
                 }
                 else
                 {
