@@ -33,7 +33,6 @@ namespace pokedex_web
         {
             if (((Dominio.Trainee)Session["trainee"]).Admin)
             {
-                btnAdministrar.Visible = true;
                 Session.Add("isAdmin", true);
                 
             }
@@ -43,6 +42,11 @@ namespace pokedex_web
         protected void btnAdministrar_Click(object sender, EventArgs e)
         {
             Response.Redirect("ListaPokemons.aspx");
+        }
+
+        protected void btnAceptar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
