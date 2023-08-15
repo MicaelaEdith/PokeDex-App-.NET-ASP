@@ -36,7 +36,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Select id, email, pass, admin from Users Where email=@email and pass=@pass");
+                datos.setearConsulta("Select id, email, pass, admin, imagenPerfil from Users Where email=@email and pass=@pass");
                 datos.setearParametro("@email", trainee.Email);
                 datos.setearParametro("@pass", trainee.Pass);
                 datos.ejecutarLectura();
@@ -45,6 +45,8 @@ namespace Negocio
                 {
                     trainee.Id = (int)datos.Lector["id"];
                     trainee.Admin = (bool)datos.Lector["admin"];
+                    if(!(datos.Lector["imagenPerfil"]is DBNull))
+                        trainee.ImgPerfil = (string)datos.Lector["imagenPerfil"];
                     return true;
                 }
                 else return false;
@@ -62,6 +64,26 @@ namespace Negocio
             }
         }
 
+        public void actualizar(Trainee user)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("Update USERS set imagenPerfil =@imagen Where id=@id");
+                datos.setearParametro("@imagen", user.ImgPerfil);
+                datos.setearParametro("@id", user.Id);
+                datos.ejecutarAccion();
 
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();                
+            }
+        }
     }
 }

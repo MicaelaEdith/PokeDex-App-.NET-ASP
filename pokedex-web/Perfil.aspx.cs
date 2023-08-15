@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
+using Negocio;
 
 namespace pokedex_web
 {
@@ -46,6 +47,32 @@ namespace pokedex_web
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                TraineeNegocio negocio = new TraineeNegocio();
+                string ruta = Server.MapPath("./Imagenes/");
+                Trainee user = (Trainee)Session["trainee"];
+                txtFile.PostedFile.SaveAs(ruta + "perfil-" + user.Id+".jpg");
+                string traineeImg = ruta + "perfil-" + user.Id + ".jpg";
+               
+                user.ImgPerfil= "perfil-" + user.Id + ".jpg";
+                user.Nombre = txtNombre.Text;
+                user.Apellido = txtApellido.Text;
+                //user.FechaNacimiento = txtFechaNacimiento.Text;
+
+                negocio.actualizar(user);
+
+                Image img=(Image)Master.FindControl("imgPerfil");
+                img.ImageUrl = "~/Imagenes/"+user.ImgPerfil;
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+            }
 
         }
     }
