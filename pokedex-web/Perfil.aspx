@@ -11,16 +11,16 @@
             }
         }      
     </style>
-    <div id="ppal" style="display: flex; margin-top:3vh;" >
+    <div id="ppal" style="display: flex; margin-top:3vh;">
         <div style="display: flex; flex-direction: column; margin-right: 2vw;" class="col-md-5">
             <asp:Label Text="Email" class="form-label mb-1" runat="server" />
-            <asp:TextBox runat="server" ID="txtEmail" class="form-control mb-2" />
+            <asp:TextBox runat="server" ID="txtEmail" class="form-control mb-2" ReadOnly="true"/>
             <asp:Label Text="Nombre" class="form-label mb-1" runat="server" />
             <asp:TextBox runat="server" ID="txtNombre" class="form-control mb-2" />
             <asp:Label Text="Apellido" class="form-label mb-1" runat="server" />
             <asp:TextBox runat="server" ID="txtApellido" class="form-control mb-2" />
             <asp:Label Text="Fecha de nacimiento" class="form-label mb-1" runat="server" />
-            <asp:TextBox runat="server" ID="txtFechaNacimiento" class="form-control mb-2" />
+            <asp:TextBox runat="server" ID="txtFechaNacimiento" class="form-control mb-2" TextMode="Date" />
         </div>
         <div style="display: flex; flex-direction: column" class="col-md-5">
             <asp:Label Text="Imagen de Perfil" class="form-label" runat="server" />

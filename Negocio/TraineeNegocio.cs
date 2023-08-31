@@ -36,7 +36,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Select id, email, pass, admin, imagenPerfil from Users Where email=@email and pass=@pass");
+                datos.setearConsulta("Select id, email, pass, admin, nombre, apellido, imagenPerfil, fechaNacimiento from Users Where email=@email and pass=@pass");
                 datos.setearParametro("@email", trainee.Email);
                 datos.setearParametro("@pass", trainee.Pass);
                 datos.ejecutarLectura();
@@ -45,8 +45,15 @@ namespace Negocio
                 {
                     trainee.Id = (int)datos.Lector["id"];
                     trainee.Admin = (bool)datos.Lector["admin"];
-                    if(!(datos.Lector["imagenPerfil"]is DBNull))
+                    if(!(datos.Lector["nombre"]is DBNull))
+                        trainee.Nombre=(string)datos.Lector["nombre"];
+                    if(!(datos.Lector["apellido"]is DBNull))
+                        trainee.Apellido = (string)datos.Lector["apellido"];
+                    if (!(datos.Lector["imagenPerfil"]is DBNull))
                         trainee.ImgPerfil = (string)datos.Lector["imagenPerfil"];
+                    if (!(datos.Lector["fechaNacimiento"] is DBNull))
+                        trainee.FechaNacimiento = DateTime.Parse(datos.Lector["fechaNacimiento"].ToString()); 
+
                     return true;
                 }
                 else return false;
@@ -69,9 +76,13 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Update USERS set imagenPerfil =@imagen Where id=@id");
-                datos.setearParametro("@imagen", user.ImgPerfil);
+                datos.setearConsulta("Update USERS set imagenPerfil =@imagen, nombre =@nombre, apellido =@apellido, fechaNacimiento=@fecha Where id=@id");
+                //datos.setearParametro("@imagen", user.ImgPerfil != null ? user.ImgPerfil: (object)DBNull.Value);
+                datos.setearParametro("@imagen", (object)user.ImgPerfil??DBNull.Value);  // operador null coalescing - recordar relación con int?
+                datos.setearParametro("@nombre", user.Nombre);
+                datos.setearParametro("@apellido", user.Apellido);
                 datos.setearParametro("@id", user.Id);
+                datos.setearParametro("@fecha", user.FechaNacimiento);
                 datos.ejecutarAccion();
 
             }

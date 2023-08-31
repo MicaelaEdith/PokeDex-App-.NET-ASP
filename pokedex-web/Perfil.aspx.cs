@@ -13,15 +13,32 @@ namespace pokedex_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["trainee"] == null)
+            try
             {
-                Response.Redirect("Login.aspx");
+                if (!IsPostBack)
+                {
+                    if (Session["trainee"] == null)
+                    {
+                        Response.Redirect("Login.aspx");
+                    }
+                    else
+                    {
+                        Trainee trainee = (Trainee)Session["trainee"];
+                        Admin();
+                        txtEmail.Text = trainee.Email.ToString();
+                        txtNombre.Text = trainee.Nombre != null ? trainee.Nombre.ToString() : null;
+                        txtApellido.Text = trainee.Apellido !=null ? trainee.Apellido.ToString() : null;
+                        txtFechaNacimiento.Text = trainee.FechaNacimiento != null ? trainee.FechaNacimiento.ToString("yyyy-MM-dd") : null; 
+
+                    }  
+
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Trainee trainee = (Trainee)Session["trainee"];
-                Admin();
-            }  
+
+                Session.Add("error", ex.ToString());
+            }
         }
 
         protected void btnCerrar_Click(object sender, EventArgs e)
@@ -50,15 +67,19 @@ namespace pokedex_web
             try
             {
                 TraineeNegocio negocio = new TraineeNegocio();
-                string ruta = Server.MapPath("./Imagenes/");
                 Trainee user = (Trainee)Session["trainee"];
-                txtFile.PostedFile.SaveAs(ruta + "perfil-" + user.Id+".jpg");
-                string traineeImg = ruta + "perfil-" + user.Id + ".jpg";
-               
-                user.ImgPerfil= "perfil-" + user.Id + ".jpg";
+
+                if (txtFile.PostedFile.FileName != "") { 
+                
+                    string ruta = Server.MapPath("./Imagenes/");
+                    txtFile.PostedFile.SaveAs(ruta + "perfil-" + user.Id+".jpg");
+                    //string traineeImg = ruta + "perfil-" + user.Id + ".jpg";
+                    user.ImgPerfil= "perfil-" + user.Id + ".jpg";
+                }
+             
                 user.Nombre = txtNombre.Text;
                 user.Apellido = txtApellido.Text;
-                //user.FechaNacimiento = txtFechaNacimiento.Text;
+                user.FechaNacimiento =DateTime.Parse(txtFechaNacimiento.Text);
 
                 negocio.actualizar(user);
 
